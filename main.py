@@ -1,9 +1,14 @@
 from fastapi import FastAPI
+from sqladmin import Admin
 from starlette.middleware.cors import CORSMiddleware
-from app.core.config import settings
+
+from app.api.dispatcher import admin_views
 from app.api.dispatcher import api_router
+from app.core.config import settings
+from app.db.dep import engine
 
 app = FastAPI()
+admin = Admin(app, engine)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,3 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
+
+
+for view in admin_views:
+    admin.add_view(view)

@@ -15,6 +15,7 @@ pyfa-converter = "*"
 python-jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
 pytz = "*"
+sqladmin = "*"
 
 [dev-packages]
 black = "*"

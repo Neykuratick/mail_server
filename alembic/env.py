@@ -51,8 +51,7 @@ def run_migrations_offline() -> None:
     context.configure(
         url=url,
         target_metadata=target_metadata,
-        literal_binds=True,
-        dialect_opts={"paramstyle": "named"},
+        compare_type=True,
         file_template="%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s",
     )
 
@@ -79,6 +78,7 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
+            compare_type=True,
             file_template="%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s",
         )
 
