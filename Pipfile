@@ -12,6 +12,11 @@ greenlet = "*"
 sqlalchemy-migrate = "*"
 alembic = "*"
 psycopg2 = "*"
+pyfa-converter = "*"
+sqlalchemy2-stubs = "*"
+python-jose = {extras = ["cryptography"], version = "*"}
+passlib = {extras = ["bcrypt"], version = "*"}
+pytz = "*"
 
 [dev-packages]
 
