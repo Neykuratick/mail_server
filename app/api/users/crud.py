@@ -20,5 +20,5 @@ class UsersCRUD(BaseCRUD):
         return res.scalar_one_or_none()
 
     async def test(self, temp_crud: TempCRUD, username: str) -> Temp:
-        """ Example of mixing cruds together """
+        """Example of mixing cruds together"""
         return await temp_crud.get_temp(username=username)

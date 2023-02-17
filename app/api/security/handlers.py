@@ -10,14 +10,14 @@ from app.api.security.service import verify_password
 from app.api.users.crud import UsersCRUD
 from app.core.config import settings
 
-router = APIRouter(prefix='/security')
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f'{settings.API_V1_URL}/security/token')
+router = APIRouter(prefix="/security")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_URL}/security/token")
 
 
-@router.post('/token', response_model=TokenScheme)
+@router.post("/token", response_model=TokenScheme)
 async def authenticate(
     form_data: OAuth2PasswordRequestForm = Depends(),
-    users: UsersCRUD = Depends(UsersCRUD)
+    users: UsersCRUD = Depends(UsersCRUD),
 ):
     user = await users.get_user(username=form_data.username)
     if not user:

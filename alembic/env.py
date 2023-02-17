@@ -53,7 +53,7 @@ def run_migrations_offline() -> None:
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
-        file_template='%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s'
+        file_template="%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s",
     )
 
     with context.begin_transaction():
@@ -70,14 +70,16 @@ def run_migrations_online() -> None:
     configuration = config.get_section(config.config_ini_section)
     configuration["sqlalchemy.url"] = get_url()
     connectable = engine_from_config(
-        configuration, prefix="sqlalchemy.", poolclass=pool.NullPool,
+        configuration,
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
     )
 
     with connectable.connect() as connection:
         context.configure(
             connection=connection,
             target_metadata=target_metadata,
-            file_template='%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s'
+            file_template="%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s",
         )
 
         with context.begin_transaction():
