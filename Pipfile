@@ -19,7 +19,6 @@ sqladmin = "*"
 
 [dev-packages]
 black = "*"
-sqlalchemy2-stubs = "*"
 
 [requires]
 python_version = "3.10"
