@@ -8,6 +8,9 @@ from app.db.base_crud import BaseCRUD
 class UsersCRUD(BaseCRUD):
     async def create_user(self, username: str, email: str, hashed_password: str) -> UserModel:
         user = UserModel(username=username, email=email, hashed_password=hashed_password)  # noqa
+        self.session.add(user)
+        await self.session.commit()
+        await self.session.refresh(user)
         return user
 
 

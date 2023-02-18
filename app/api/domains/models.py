@@ -11,9 +11,9 @@ from app.db.mixins import TimeMixin
 
 
 class DomainModel(TimeMixin, Base):
-    __tablename = "domains"
+    __tablename__ = "domains"
 
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    name = Column(String, unique=True)
-    owner_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    id: Mapped[int] = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name: Mapped[str] = Column(String, unique=True)
+    owner_id: Mapped[int] = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     owner: Mapped[UserModel] = relationship("UserModel", lazy="joined")

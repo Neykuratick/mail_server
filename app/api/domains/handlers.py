@@ -16,5 +16,4 @@ async def create(
     domains: DomainsCRUD = Depends(DomainsCRUD),
     user: UserReadScheme = Depends(get_current_user),
 ):
-    result = await domains.create(name=domain.name, user_id=user.id)
-    return DomainCreateScheme.from_orm(result)
+    return await domains.create(name=domain.name, user_id=user.id)
