@@ -5,7 +5,6 @@ from sqlalchemy.orm import declared_attr
 
 
 class TimeMixin:
-
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()

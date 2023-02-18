@@ -14,8 +14,8 @@ admin_auth = AdminAuth(secret_key=settings.ADMIN_SECRET_KEY)
 admin = Admin(
     app=app,
     engine=engine,
-    base_url='/admin',
-    title=f'{settings.APP_TITLE} Administration',
+    base_url="/admin",
+    title=f"{settings.APP_TITLE} Administration",
     debug=settings.DEBUG,
     authentication_backend=admin_auth,
 )

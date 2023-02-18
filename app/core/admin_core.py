@@ -11,13 +11,13 @@ from app.db.dep import async_session
 class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         body = await request.body()
-        params = body.decode('utf-8').split('&')
-        username, password = params[0].split('=')[1], params[1].split('=')[1]
+        params = body.decode("utf-8").split("&")
+        username, password = params[0].split("=")[1], params[1].split("=")[1]
 
         async with async_session() as session:
             users_crud = UsersCRUD(session=session)
             token = await authenticate(username=username, password=password, users=users_crud)
-        
+
         request.session.update({"token": token.access_token})
         return True
 
@@ -26,7 +26,7 @@ class AdminAuth(AuthenticationBackend):
         return True
 
     async def authenticate(self, request: Request) -> bool:
-        token = request.session.get('token')
+        token = request.session.get("token")
 
         if not token:
             return False
@@ -38,7 +38,6 @@ class AdminAuth(AuthenticationBackend):
             raise e
 
         return True
-
 
 
 class ModelView(BaseModelView):
