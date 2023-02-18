@@ -1,6 +1,4 @@
 from fastapi import APIRouter
-from sqladmin import Admin
-
 from app.api.domains.admin import ModelAdmin
 from app.api.users.admin import UserAdmin
 from app.api.users.handlers import router as users_router

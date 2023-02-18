@@ -8,6 +8,7 @@ from app.core.config import settings
 from app.db.dep import engine
 
 app = FastAPI()
+app.openapi_url
 admin = Admin(app, engine)
 
 app.add_middleware(

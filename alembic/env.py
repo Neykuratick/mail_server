@@ -3,6 +3,8 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
+
+from app.core.config import settings
 from app.db.base import Base
 from alembic import context
 
@@ -27,14 +29,6 @@ target_metadata = Base.metadata
 # ... etc.
 
 
-def get_url():
-    user = os.getenv("POSTGRES_USER", "root")
-    password = os.getenv("POSTGRES_PASSWORD", "root")
-    server = os.getenv("POSTGRES_SERVER", "localhost")
-    db = os.getenv("POSTGRES_DB", "db")
-    return f"postgresql://{user}:{password}@{server}/{db}"
-
-
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
 
@@ -47,9 +41,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = get_url()
     context.configure(
-        url=url,
+        url=settings.POSTGRES_URL,
         target_metadata=target_metadata,
         compare_type=True,
         file_template="%%(year)s_%%(month)02d_%%(day)02d_%%(hour)02d%%(minute)02d_%%(slug)s",
@@ -67,7 +60,7 @@ def run_migrations_online() -> None:
 
     """
     configuration = config.get_section(config.config_ini_section)
-    configuration["sqlalchemy.url"] = get_url()
+    configuration["sqlalchemy.url"] = settings.POSTGRES_URL
     connectable = engine_from_config(
         configuration,
         prefix="sqlalchemy.",
