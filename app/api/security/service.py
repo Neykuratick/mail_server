@@ -1,7 +1,12 @@
 from datetime import datetime
 from datetime import timedelta
+
+from fastapi import HTTPException
 from jose import jwt
 from passlib.context import CryptContext
+
+from app.api.security.schemes import TokenScheme
+from app.api.users.crud import UsersCRUD
 from app.core.config import settings
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -32,3 +37,20 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
         algorithm=settings.JWT_ALGORITHM,
     )
     return encoded_jwt
+
+
+async def authenticate(
+    username: str,
+    password: str,
+    users: UsersCRUD,
+):
+    user = await users.get_user(username=username)
+    if not user:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+
+    valid_password = verify_password(password, user.hashed_password)
+    if not valid_password:
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+
+    token = create_access_token(data={"sub": user.username})
+    return TokenScheme(access_token=token)

@@ -12,10 +12,7 @@ from app.api.users.schemes import UserReadScheme
 from app.core.config import settings
 
 
-async def get_current_user(
-    token: str = Depends(oauth2_scheme),
-    users: UsersCRUD = Depends(UsersCRUD),
-) -> UserReadScheme:
+def validate_decode_token(token: str) -> dict:
     try:
         payload = jwt.decode(
             token=token,
@@ -27,6 +24,15 @@ async def get_current_user(
     except JWTError as e:
         logging.debug(f"JWT decoding error: {e}")
         raise HTTPException(status_code=401, detail="Could not decode JWT token")
+
+    return payload
+
+
+async def get_current_user(
+    token: str = Depends(oauth2_scheme),
+    users: UsersCRUD = Depends(UsersCRUD),
+) -> UserReadScheme:
+    payload = validate_decode_token(token=token)
 
     username = payload.get("sub")
     if username is None:
