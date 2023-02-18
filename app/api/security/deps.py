@@ -38,7 +38,7 @@ async def get_current_user(
     if username is None:
         raise HTTPException(status_code=401, detail="Could not validate credentials")
 
-    user = await users.get_user(username=username)
+    user = await users.get_user_by_username(username=username)
     if user is None:
         raise HTTPException(status_code=401, detail="Could not validate credentials")
 

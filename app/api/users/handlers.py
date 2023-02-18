@@ -18,6 +18,6 @@ async def register(user: UserCreateScheme, users: UsersCRUD = Depends(UsersCRUD)
     return await users.create_user(**user_dicted)
 
 
-@router.post("/me", response_model=UserReadScheme)
+@router.get("/me", response_model=UserReadScheme)
 async def get_me(user: UserReadScheme = Depends(get_current_user)):
     return user

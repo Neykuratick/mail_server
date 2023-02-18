@@ -44,7 +44,7 @@ async def authenticate(
     password: str,
     users: UsersCRUD,
 ):
-    user = await users.get_user(username=username)
+    user = await users.get_user_by_username(username=username)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
 
