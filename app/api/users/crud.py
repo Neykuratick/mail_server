@@ -13,7 +13,6 @@ class UsersCRUD(BaseCRUD):
         await self.session.refresh(user)
         return user
 
-
     async def get_user_by_id(self, user_id: int) -> UserModel:
         sql = select(UserModel).where(UserModel.username == user_id)
 

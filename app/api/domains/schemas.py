@@ -14,4 +14,3 @@ class DomainReadScheme(BaseModel):
 
     class Meta:
         orm_model = DomainModel
-

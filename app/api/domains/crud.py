@@ -16,4 +16,3 @@ class DomainsCRUD(BaseCRUD[DomainModel]):
         stmt = select(DomainModel).where(DomainModel.id == domain_id)
         query = await self.session.execute(stmt)
         return query.scalar_one_or_none()
-

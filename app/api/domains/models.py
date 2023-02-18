@@ -15,5 +15,9 @@ class DomainModel(TimeMixin, Base):
 
     id: Mapped[int] = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name: Mapped[str] = Column(String, unique=True)
-    owner_id: Mapped[int] = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    owner_id: Mapped[int] = Column(
+        Integer,
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False,
+    )
     owner: Mapped[UserModel] = relationship("UserModel", lazy="joined")
