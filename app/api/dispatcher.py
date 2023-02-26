@@ -1,6 +1,12 @@
 from fastapi import APIRouter
+
+from app.api.permissions.admin import PermissionActionsAdmin
+from app.api.permissions.admin import PermissionTargetsActionsAdmin
+from app.api.permissions.admin import PermissionTargetsAdmin
+from app.api.roles.admin import RolesAdmin
+from app.api.roles.admin import RolesTargetActionsAdmin
 from app.core.config import settings
-from app.api.domains.admin import ModelAdmin
+from app.api.domains.admin import DomainAdmin
 from app.api.users.admin import UserAdmin
 from app.api.users.handlers import router as users_router
 from app.api.security.handlers import router as security_router
@@ -14,5 +20,10 @@ api_router.include_router(domains_router, tags=["domains"])
 
 admin_views = [
     UserAdmin,
-    ModelAdmin,
+    DomainAdmin,
+    PermissionTargetsAdmin,
+    PermissionActionsAdmin,
+    PermissionTargetsActionsAdmin,
+    RolesAdmin,
+    RolesTargetActionsAdmin,
 ]

@@ -5,7 +5,7 @@
 - Web framework: `FastAPI`
 - ORM: `SQLAlchemy 2.0`
 - Migrations: `alembic`
-- 
+- Database: `Postgres`
 
 ## Workflow
 
