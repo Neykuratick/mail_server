@@ -2,12 +2,13 @@ from enum import Enum
 from enum import auto
 
 
-# WARNING!! EVERY MODIFICATION OF THIS ENUM REQUIRES A MIGRATION
-# see https://stackoverflow.com/a/65173731/13246657
-# tldr see migration 2023_02_26_1637-5a077a981eb0_add_enums
+# When adding new Target or Action, you must write a migration to add it to db
 
 
 class TargetsEnum(str, Enum):
+    def _generate_next_value_(self, start, count, last_values):
+        return self.upper()
+
     DOMAIN = auto()
     USER = auto()
     PERMISSION = auto()
@@ -15,7 +16,10 @@ class TargetsEnum(str, Enum):
     ROLE = auto()
 
 
-class ActionsEnm(str, Enum):
+class ActionsEnum(str, Enum):
+    def _generate_next_value_(self, start, count, last_values):
+        return self.upper()
+
     CREATE = auto()
     READ = auto()
     UPDATE = auto()

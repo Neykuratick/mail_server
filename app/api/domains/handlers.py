@@ -11,7 +11,7 @@ router = APIRouter(prefix="/domains")
 
 
 @router.post("/create", response_model=DomainReadScheme)
-async def create(
+async def create_domain(
     domain: DomainCreateScheme,
     domains: DomainsCRUD = Depends(DomainsCRUD),
     user: UserReadScheme = Depends(get_current_user),

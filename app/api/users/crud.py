@@ -1,17 +1,19 @@
 from sqlalchemy import select
+
 from app.api.temp.crud import TempCRUD
 from app.api.temp.models import Temp
 from app.api.users.models import UserModel
 from app.db.base_crud import BaseCRUD
 
 
-class UsersCRUD(BaseCRUD):
+class UsersCRUD(BaseCRUD[UserModel]):
     async def create_user(self, username: str, email: str, hashed_password: str) -> UserModel:
-        user = UserModel(username=username, email=email, hashed_password=hashed_password)  # noqa
-        self.session.add(user)
-        await self.session.commit()
-        await self.session.refresh(user)
-        return user
+        return await self.base_insert(
+            UserModel,
+            username=username,
+            email=email,
+            hashed_password=hashed_password,
+        )
 
     async def get_user_by_id(self, user_id: int) -> UserModel:
         sql = select(UserModel).where(UserModel.username == user_id)

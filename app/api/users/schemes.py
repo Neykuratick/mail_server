@@ -1,13 +1,13 @@
-from app.db.base_model import BaseModel
+from app.db.base_model import BaseScheme
 
 
-class UserReadScheme(BaseModel):
+class UserReadScheme(BaseScheme):
     id: int
     username: str
     email: str
 
 
-class UserCreateScheme(BaseModel):
+class UserCreateScheme(BaseScheme):
     username: str
     email: str
     password: str

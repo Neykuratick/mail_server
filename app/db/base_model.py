@@ -10,6 +10,6 @@ Base = declarative_base(metadata=metadata)
 BaseModelType = TypeVar("BaseModelType", bound=Base)
 
 
-class BaseModel(BaseModelPydantic):
+class BaseScheme(BaseModelPydantic):
     class Config:
         orm_mode = True

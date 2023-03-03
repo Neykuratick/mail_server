@@ -43,7 +43,10 @@ def downgrade() -> None:
         sa.Column("owner_id", sa.INTEGER(), autoincrement=False, nullable=False),
         sa.Column("created_at", postgresql.TIMESTAMP(), autoincrement=False, nullable=True),
         sa.ForeignKeyConstraint(
-            ["owner_id"], ["users.id"], name="domainmodel_owner_id_fkey", ondelete="CASCADE"
+            ["owner_id"],
+            ["users.id"],
+            name="domainmodel_owner_id_fkey",
+            ondelete="CASCADE",
         ),
         sa.PrimaryKeyConstraint("id", name="domainmodel_pkey"),
         sa.UniqueConstraint("name", name="domainmodel_name_key"),

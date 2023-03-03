@@ -8,7 +8,7 @@ from app.db.base_model import Base
 from app.db.mixins import TimeMixin
 
 
-class Roles(TimeMixin, Base):
+class RoleModel(TimeMixin, Base):
     __tablename__ = "roles"
 
     id: Mapped[int] = Column(Integer, primary_key=True, index=True, autoincrement=True)
